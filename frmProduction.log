@@ -1,0 +1,19 @@
+Line 130: Class MSComctlLib.ListView of control Production_ListView was not a loaded control class.
+Line 136: The property name _ExtentX in Production_ListView is invalid.
+Line 137: The property name _ExtentY in Production_ListView is invalid.
+Line 138: The property name View in Production_ListView is invalid.
+Line 139: The property name LabelWrap in Production_ListView is invalid.
+Line 140: The property name HideSelection in Production_ListView is invalid.
+Line 141: The property name Checkboxes in Production_ListView is invalid.
+Line 142: The property name FullRowSelect in Production_ListView is invalid.
+Line 143: The property name GridLines in Production_ListView is invalid.
+Line 144: The property name _Version in Production_ListView is invalid.
+Line 149: The property name NumItems in Production_ListView is invalid.
+Line 153: The property name ColumnHeader(1) in Production_ListView is invalid.
+Line 158: The property name ColumnHeader(2) in Production_ListView is invalid.
+Line 163: The property name ColumnHeader(3) in Production_ListView is invalid.
+Line 168: The property name ColumnHeader(4) in Production_ListView is invalid.
+Line 173: The property name ColumnHeader(5) in Production_ListView is invalid.
+Line 178: The property name ColumnHeader(6) in Production_ListView is invalid.
+Line 183: The property name ColumnHeader(7) in Production_ListView is invalid.
+Line 188: The property name ColumnHeader(8) in Production_ListView is invalid.

@@ -1,0 +1,142 @@
+'Script Pengurangan Persediaan Stok Barang
+        i = 1
+        Do While i <= Purchase_ListView.ListItems.Count
+            kode = Purchase_ListView.ListItems(i)
+            jmlbeli = Purchase_ListView.ListItems(i).ListSubItems(4).Text
+            
+            Buka_TBahan kode
+            stok = rsItems!kuantitas
+            
+            updateStok = Val(stok) - Val(jmlbeli)
+            Ubah_TBahan kode, updateStok
+            i = i + 1
+        Loop
+        
+        'Script Update Harga Stok Barang
+        i = 1
+        Do While i <= Purchase_ListView.ListItems.Count
+            kode = Purchase_ListView.ListItems(i).Text
+            
+            Buka_TBahan kode
+            stok = rsItems!kuantitas
+            harga = rsItems!harga_bahan
+            t_bahan = rsItems!total_bahan
+            
+            t_bahan = Val(harga) * Val(stok)
+            Ubah_HargaBahan kode, t_bahan
+            i = i + 1
+        Loop
+-------------------------------------------------------------------------------
+	If Sales_ListView.ListItems.Count > 1 Then
+                Dim h As Integer
+                
+                'HPP
+                Buka_Jurnal "5.1.1.1"
+                SA1 = rsJournal!saldo_akhir
+                
+                For h = 1 To Sales_ListView.ListItems.Count
+                    GrandTotal_HPP1 = Val(SA1) + ((26250 * Val(kuan)) + (20000 * Val(kuan)))
+                Next h
+                
+                Ubah_Jurnal "5.1.1.1", GrandTotal_HPP1
+                h = h + 1
+                
+                'PERSEDIAAN BARANG JADI
+                Buka_Jurnal "1.1.2.4"
+                SA2 = rsJournal!saldo_akhir
+                
+                For h = 1 To Sales_ListView.ListItems.Count
+                    GrandTotal_HPP2 = Val(SA2) - ((26250 * Val(kuan)) + (20000 * Val(kuan)))
+                Next h
+                
+                Ubah_Jurnal "1.1.2.4", GrandTotal_HPP2
+                h = h + 1
+                
+                'Script Penambahan Data Jurnal HPP
+                With rsSales
+                    .Open "select * from Journal_Data", ConnectDB
+                    .AddNew
+                    !id_trans = txtTrans.Text
+                    !tanggal = dateTrans.Value
+                    !uraian = "Penjualan Produk"
+                    !nama_akun1 = "HPP"
+                    !id_akun1 = "5.1.1.1"
+                    !debit = (26250 * Val(kuan)) + (20000 * Val(kuan))
+                    !nama_akun2 = "PERSEDIAAN BARANG JADI"
+                    !id_akun2 = "1.1.2.4"
+                    !kredit = (26250 * Val(kuan)) + (20000 * Val(kuan))
+                    .Update
+                    .Close
+                End With
+            ElseIf nm_pr = "Songkok Bagus" Then
+                'HPP
+                Buka_Jurnal "5.1.1.1"
+                SB = rsJournal!saldo_akhir
+                
+                updateSB = Val(SB) + (26250 * Val(kuan))
+                Ubah_Jurnal "5.1.1.1", updateSB
+                i = i + 1
+                
+                'PERSEDIAAN BARANG JADI
+                Buka_Jurnal "1.1.2.4"
+                SB2 = rsJournal!saldo_akhir
+                
+                updateSB2 = Val(SB2) - (26250 * Val(kuan))
+                Ubah_Jurnal "1.1.2.4", updateSB2
+                i = i + 1
+                
+                'Script Penambahan Data Jurnal HPP
+                With rsSales
+                    .Open "select * from Journal_Data", ConnectDB
+                    .AddNew
+                    !id_trans = txtTrans.Text
+                    !tanggal = dateTrans.Value
+                    !uraian = "Penjualan Produk"
+                    !nama_akun1 = "HPP"
+                    !id_akun1 = "5.1.1.1"
+                    !debit = 26250 * Val(kuan)
+                    !nama_akun2 = "PERSEDIAAN BARANG JADI"
+                    !id_akun2 = "1.1.2.4"
+                    !kredit = 26250 * Val(kuan)
+                    .Update
+                    .Close
+                End With
+            ElseIf nm_pr = "Songkok Sedang" Then
+                'HPP
+                Buka_Jurnal "5.1.1.1"
+                SS = rsJournal!saldo_akhir
+                
+                updateSS = Val(SS) + (20000 * Val(kuan))
+                Ubah_Jurnal "5.1.1.1", updateSS
+                i = i + 1
+                
+                'PERSEDIAAN BARANG JADI
+                Buka_Jurnal "1.1.2.4"
+                SS2 = rsJournal!saldo_akhir
+                
+                updateSS2 = Val(SS2) - (20000 * Val(kuan))
+                Ubah_Jurnal "1.1.2.4", updateSS2
+                i = i + 1
+                
+                'Script Penambahan Data Jurnal HPP
+                With rsSales
+                    .Open "select * from Journal_Data", ConnectDB
+                    .AddNew
+                    !id_trans = txtTrans.Text
+                    !tanggal = dateTrans.Value
+                    !uraian = "Penjualan Produk"
+                    !nama_akun1 = "HPP"
+                    !id_akun1 = "5.1.1.1"
+                    !debit = 20000 * Val(kuan)
+                    !nama_akun2 = "PERSEDIAAN BARANG JADI"
+                    !id_akun2 = "1.1.2.4"
+                    !kredit = 20000 * Val(kuan)
+                    .Update
+                    .Close
+                End With
+            End If
+--------------------------------------------------------------------------------------
+
+-------------------------------------------------------------------------------
+
+
